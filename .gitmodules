@@ -1,0 +1,3 @@
+[submodule "web/bluedragon1221.github.io"]
+	path = web/bluedragon1221.github.io
+	url = git@github.com:bluedragon1221/bluedragon1221.github.io
