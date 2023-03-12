@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Pikachu",
+        "type": "Electric",
+        "hp": 0,
+        "moves": []
+    },
+    {
+        "name": "Squirtle",
+        "type": "Water",
+        "hp": 150,
+        "moves": [
+            {
+                "name": "KILLR",
+                "damage": 0
+            }
+        ]
+    },
+    {
+        "name": "Quilava",
+        "type": "Fire",
+        "hp": 80,
+        "moves": [
+            {
+                "name": "Mini Eruption",
+                "damage": 0
+            }
+        ]
+    },
+    {
+        "name": "Quilava",
+        "type": "Fire",
+        "hp": 0,
+        "moves": [
+            {
+                "name": "aj;sdf",
+                "damage": 0
+            }
+        ]
+    },
+    {
+        "name": "Quilava",
+        "type": "Fire",
+        "hp": 80,
+        "moves": [
+            {
+                "name": "Mini Eruption",
+                "damage": 0
+            }
+        ]
+    }
+]
