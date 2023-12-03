@@ -1,5 +1,5 @@
 #!/bin/bash
-unset password
+# unset password
 IFS=
 
 while true; do
