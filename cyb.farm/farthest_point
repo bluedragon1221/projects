@@ -1,0 +1,13 @@
+Now at: https://chapt.1.cyb.farm
+
+SAVE FOR FUTURE USE: information collected from hunt with style reveals a hidden cyher that could be used to encode a message.
+
+# Chapter 0x00 Cookie
+I got a cookie! If I need it back, it's here: https://c0@chat.0.cyb.farm/cookie.html
+New `curl`s need the following flag:
+```sh
+curl $URL -H 'Cookie: cybfarm-chapt.0=679293a359cadabe6b7dd51644510c345c1f82827554085043e0c5d1bad795bb'
+```
+
+# To use on next flag
+Use this code to save flags in the future: OJRNTYM7ALCQLIIGR5JUGRCX
