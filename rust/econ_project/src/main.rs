@@ -1,6 +1,7 @@
 use rand::Rng;
 
 #[derive(Debug)]
+#[allow(dead_code)]
 enum IndustryName {
     Mining,
     Agriculture,
@@ -71,6 +72,26 @@ impl Industry {
                 labor: 0,
                 energy: 0,
                 materials: 2,
+                goods: 0,
+            },
+        }
+    }
+    fn new_agriculture() -> Industry {
+        Industry {
+            name: IndustryName::Agriculture,
+            build_cost: Inventory {
+                money: 11_000,
+                labor: 3,
+                energy: 0,
+                materials: 0,
+                goods: 0,
+            },
+            turn_cost: Inventory::new_empty(),
+            turn_income: Inventory {
+                money: 2_100,
+                labor: 0,
+                energy: 0,
+                materials: 3,
                 goods: 0,
             },
         }
