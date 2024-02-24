@@ -1,21 +1,41 @@
 use std::{collections::HashMap, net::Ipv4Addr};
 
 #[derive(Debug)]
-pub enum LookupError {
-    NotFound,
+pub enum Error {
+    LookupError,
+    ParseIpError,
+}
+
+#[derive(Debug)]
+pub struct LookupResult {
+    website: String,
+    ip: Ipv4Addr,
+    hops: u8,
+}
+
+impl LookupResult {
+    pub fn get_website(&self) -> String {
+        self.website.clone()
+    }
+
+    pub fn get_ip(&self) -> Ipv4Addr {
+        self.ip
+    }
+
+    pub fn get_hops(&self) -> u8 {
+        self.hops
+    }
 }
 
 #[derive(Debug)]
 pub struct Dns<'a> {
-    // website, IP Address
-    pub lookup_table: HashMap<String, Ipv4Addr>,
-    pub contacts: Vec<&'a Dns<'a>>,
+    lookup_table: HashMap<String, Ipv4Addr>,
+    contacts: Vec<&'a Dns<'a>>,
 }
 
 pub struct DnsBuilder<'a> {
-    // website, IP Address
-    pub lookup_table: HashMap<String, Ipv4Addr>,
-    pub contacts: Vec<&'a Dns<'a>>,
+    lookup_table: HashMap<String, Ipv4Addr>,
+    contacts: Vec<&'a Dns<'a>>,
 }
 
 impl<'a> Dns<'a> {
@@ -26,15 +46,23 @@ impl<'a> Dns<'a> {
         }
     }
 
-    pub fn lookup(&self, website: &str) -> Result<Ipv4Addr, LookupError> {
+    fn lookup_internal(&self, website: &str, hops: u8) -> Result<LookupResult, Error> {
         match self.lookup_table.get(website) {
-            Some(ip) => Ok(ip.clone()),
+            Some(ip) => Ok(LookupResult {
+                website: website.to_owned(),
+                ip: ip.clone(),
+                hops,
+            }),
             None => self
                 .contacts
                 .iter()
-                .find_map(|dns| dns.lookup(website).ok())
-                .ok_or(LookupError::NotFound),
+                .find_map(|dns| dns.lookup_internal(website, hops + 1).ok())
+                .ok_or(Error::LookupError),
         }
+    }
+
+    pub fn lookup(&self, website: &str) -> Result<LookupResult, Error> {
+        self.lookup_internal(website, 0)
     }
 }
 
@@ -44,9 +72,15 @@ impl<'a> DnsBuilder<'a> {
         self
     }
 
-    pub fn website(&mut self, website: &str, ip: &str) -> &mut Self {
-        self.lookup_table
-            .insert(String::from(website), ip.parse::<Ipv4Addr>().unwrap());
+    pub fn website(&mut self, website: &str, ip: Ipv4Addr) -> &mut Self {
+        self.lookup_table.insert(String::from(website), ip);
+        self
+    }
+
+    pub fn lookup_table(&mut self, lookup_table: HashMap<&str, Ipv4Addr>) -> &mut Self {
+        for (website, ip) in lookup_table {
+            self.website(website, ip);
+        }
         self
     }
 
