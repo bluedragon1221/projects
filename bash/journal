@@ -1,8 +1,0 @@
-#!/bin/env -S bash -c "echo -e \n---$(date)\n | tee -a ./journal; helix +99999999 ./journal"
-
----
-
-Some note here
-
----
-
