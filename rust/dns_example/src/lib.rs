@@ -53,11 +53,15 @@ impl<'a> Dns<'a> {
                 ip: ip.clone(),
                 hops,
             }),
-            None => self
-                .contacts
-                .iter()
-                .find_map(|dns| dns.lookup_internal(website, hops + 1).ok())
-                .ok_or(Error::LookupError),
+            None => {
+                for dns in self.contacts.iter() {
+                    match dns.lookup_internal(website, hops + 1) {
+                        Ok(result) => return Ok(result),
+                        Err(_) => continue,
+                    }
+                }
+                Err(Error::LookupError)
+            }
         }
     }
 
