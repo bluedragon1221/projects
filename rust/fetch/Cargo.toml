@@ -1,0 +1,12 @@
+[package]
+name = "fetch"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive"] }
+console = "0.15.8"
+pretty-duration = "0.1.1"
+sysinfo = "0.30.7"
+thiserror = "1.0.58"
+whoami = "1.5.1"

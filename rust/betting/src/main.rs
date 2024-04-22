@@ -31,7 +31,11 @@ impl Player {
     // Mutator
     fn bet(&mut self, amount: i32) -> i32 {
         let amount_gained = bet(amount);
-        self.money = (self.money - amount) + amount_gained;
+        if amount_gained > 0 {
+            self.money = (self.money + amount) + amount_gained;
+        } else if amount_gained < 0 {
+            self.money = (self.money - amount) - amount_gained;
+        }
         -amount + amount_gained
     }
 }
@@ -53,5 +57,5 @@ fn main() {
             Ordering::Equal => print!("Your money didn't change"),
         }
     }
-    println!("{} lost the game.", { player.name });
+    println!("{} lost the game.", player.name);
 }
