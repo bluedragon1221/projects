@@ -34,10 +34,9 @@ pub fn ascii_art(art: AsciiArt) -> String {
                 // 7 spaces
                 "       
 (\\_(\\  
-( {} {}) 
-c({})({})
-       ",
-                eye, eye, paw, paw
+( {eye} {eye}) 
+c({paw})({paw})
+       "
             )
         }
         AsciiArt::Owl => {
@@ -45,10 +44,9 @@ c({})({})
             let wing = style("./").red().bold();
             format!(
                 "       
-{{{},{}}}  
-{})_)  
- \" \"   ",
-                eye, eye, wing
+{{{eye},{eye}}}  
+{wing})_)  
+ \" \"   "
             )
         }
     }
@@ -68,7 +66,7 @@ pub fn entry(name: &str, color: Color, data: String) -> String {
 
     let mut dots = String::new();
     for _ in 0..num_of_dots {
-        dots.push_str("⋅")
+        dots.push('⋅')
     }
 
     let bold = || Style::new().bold();

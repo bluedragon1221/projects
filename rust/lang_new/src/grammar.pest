@@ -1,0 +1,13 @@
+Program = { SOI ~ Term ~ (";" ~ "\n"? ~ Term)* ~ EOI }
+Term = _{ Value | Expr }
+Expr = { Operator ~ "(" ~ Term ~ ("," ~ Term)* ~ ")" }
+
+Operator = _{ And | Or }
+And = { "and" }
+Or = { "or" }
+
+Value = _{ True | False }
+True = { "1" | "true"}
+False = { "0" | "false" }
+
+WHITESPACE = _{ " " }

@@ -24,8 +24,11 @@ struct Player {
 
 impl Player {
     // Constructor
-    fn new(name: String, money: i32) -> Player {
-        Player { name, money }
+    fn new(name: &str, money: i32) -> Player {
+        Player {
+            name: name.to_string(),
+            money,
+        }
     }
 
     // Mutator
@@ -41,7 +44,7 @@ impl Player {
 }
 
 fn main() {
-    let mut player = Player::new("Collin".into(), 5_000);
+    let mut player = Player::new("Collin", 5_000);
 
     while player.money >= 0 {
         let amount = input_int(format!(

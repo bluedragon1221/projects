@@ -2,7 +2,6 @@ use std::time::Duration;
 
 use pretty_duration::pretty_duration;
 use sysinfo::System;
-use whoami;
 
 use crate::FetchError;
 

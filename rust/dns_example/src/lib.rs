@@ -1,4 +1,3 @@
-use no_panic::no_panic;
 use std::{collections::HashMap, net::Ipv4Addr};
 
 #[derive(Debug)]

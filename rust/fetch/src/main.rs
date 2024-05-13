@@ -60,14 +60,13 @@ fn could_error() -> Result<(), FetchError> {
         data_block.push(entry("Uptime", Color::Blue, Sysinfo::get_uptime()?))
     }
 
-    let mut ascii_block = ascii::ascii_art(args.ascii_art);
+    let ascii_block = ascii::ascii_art(args.ascii_art);
 
     let mut to_print = String::new();
     ascii_block
-        .split("\n")
-        .into_iter()
-        .zip(data_block.into_iter())
-        .for_each(|(a, b)| to_print.push_str(&format!("  {}  {}\n", a, b)));
+        .split('\n')
+        .zip(data_block)
+        .for_each(|(a, b)| to_print.push_str(&format!("  {a}  {b}\n")));
 
     println!("{}", to_print);
 

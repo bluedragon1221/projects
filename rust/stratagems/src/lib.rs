@@ -36,7 +36,6 @@ pub struct Stratagem {
 }
 
 impl Stratagem {
-    #[must_use]
     pub fn new(name: &str, code: Vec<char>) -> Self {
         Self {
             name: name.into(),
@@ -44,12 +43,10 @@ impl Stratagem {
         }
     }
 
-    #[must_use]
     pub fn get_name(&self) -> String {
         self.name.clone()
     }
 
-    #[must_use]
     pub fn get_code(&self) -> Vec<char> {
         self.code.clone()
     }
@@ -57,7 +54,7 @@ impl Stratagem {
 
 impl FromStr for Stratagem {
     type Err = StratError;
-    fn from_str(inp: &str) -> Result<Self, StratError> {
+    fn from_str(inp: &str) -> Result<Self, Self::Err> {
         STRATAGEMS
             .iter()
             .filter(|strat| strat.get_name() == inp)

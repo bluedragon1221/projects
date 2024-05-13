@@ -6,8 +6,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+cursive = "0.20.0"
 fuzzy-matcher = "0.3.7"
 fuzzy_match = "0.2.1"
+inquire = "0.7.5"
+lazy_static = "1.4.0"
+list_comprehension_macro = "0.1.1"
 savefile = "0.16.5"
 savefile-derive = "0.16.5"
 thiserror = "1.0.58"
