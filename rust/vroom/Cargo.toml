@@ -1,0 +1,9 @@
+[package]
+name = "vroom"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+derive-new = "0.6.0"
+savefile = "0.17.4"
+savefile-derive = "0.17.4"
