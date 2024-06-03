@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/1185818338_3758176295_223132457.mp4'
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/624642324_1704852926_585643070.mp4'
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/624642324_2892122025_3845675718.mp4'
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/624642324_1704852926_431618181.mp4'
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/624642324_3108680176_255882162.mp4'
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/624642324_1704852926_1081483146.mp4'
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/624642324_3039664075_3219330200.mp4'
+file 'file:/var/home/collin/projects/python/manim/media/videos/scene/480p15/partial_movie_files/Quadratic/624642324_1704852926_3698772515.mp4'

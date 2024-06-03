@@ -1,0 +1,8 @@
+[package]
+name = "quadratics"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+list_comprehension_macro = "0.1.1"
+math_dsl_macro = "0.1.0"

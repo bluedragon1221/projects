@@ -8,25 +8,25 @@ mod tower {
     mod block {
         const ALIGN: &str = "       ";
 
-        use std::fmt::{Result, Write};
+        use std::fmt::{Display, Result, Write};
 
-        pub fn sep(res: &mut impl Write) -> Result {
+        pub fn sep<W: Write>(res: &mut W) -> Result {
             writeln!(res, "{ALIGN}|------------|")
         }
 
-        pub fn roof(res: &mut impl Write, name: String) -> Result {
-            writeln!(res, "{ALIGN}|{:=^12}|", name)
-        }
-
-        pub fn floor(res: &mut impl Write, number: i32) -> Result {
-            writeln!(res, "({:0>3})  |-[]--[]--[]-|", number)
-        }
-
-        pub fn lobby(res: &mut impl Write) -> Result {
+        pub fn lobby<W: Write>(res: &mut W) -> Result {
             writeln!(
                 res,
                 "{ALIGN}|----_____---|\n{ALIGN}|----|  ,|---|\n{ALIGN}|----|   |---|"
             )
+        }
+
+        pub fn roof<W: Write, D: Display>(res: &mut W, text: D) -> Result {
+            writeln!(res, "{ALIGN}|{:=^12}|", text)
+        }
+
+        pub fn floor<W: Write, D: Display>(res: &mut W, text: D) -> Result {
+            writeln!(res, "({:0>3})  |-[]--[]--[]-|", text)
         }
     }
 
@@ -36,7 +36,7 @@ mod tower {
 
         impl Display for super::Tower {
             fn fmt(&self, fmt: &mut Formatter<'_>) -> Result {
-                roof(fmt, self.name.clone())?;
+                roof(fmt, &self.name)?;
                 sep(fmt)?;
                 for i in 0..self.floors {
                     floor(fmt, self.floors - i)?;
