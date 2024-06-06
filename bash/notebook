@@ -1,4 +1,4 @@
-#!/bin/env -S "tee -a" >/dev/null
+#!/bin/cmd tee -a
 - [ X ] Somethin I already did
 Testing
 Testing testing
