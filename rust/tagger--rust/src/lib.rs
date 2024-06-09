@@ -1,3 +1,5 @@
+#![feature(os_str_display)]
+
 use std::{
     ffi::OsStr,
     path::{Path, PathBuf},
@@ -16,29 +18,20 @@ pub enum TaggerError {
 
     #[error("File doesn't exist: {0}")]
     Nonexistent(String),
-
-    #[error("{0}")]
-    Other(String),
 }
 
 pub type Result<T> = std::result::Result<T, TaggerError>;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct TaggedFile {
-    pub og_file: PathBuf,
-    dir: String,
+    parent: PathBuf,
     name: String,
     tags: Vec<String>,
     extension: Option<String>,
 }
 
-fn bad_osstr(osstr: &OsStr) -> Result<String> {
-    Ok(osstr
-        .to_str()
-        .ok_or(TaggerError::Other(
-            "Couldn't convert osstr to String".into(),
-        ))?
-        .to_string())
+pub fn dsp(str: &OsStr) -> String {
+    str.display().to_string()
 }
 
 impl TaggedFile {
@@ -48,44 +41,28 @@ impl TaggedFile {
             return Err(TaggerError::Nonexistent(filename.into()));
         }
 
-        let extension: Option<String> = if let Some(ext) = path.extension() {
-            Some(
-                ext.to_str()
-                    .map(String::from)
-                    .ok_or(TaggerError::Other("parsing".into()))?,
-            )
-        } else {
-            None
-        };
+        let stem: String = path
+            .file_stem()
+            .map(dsp) // if Some, convert to String
+            .unwrap_or("".into());
 
-        let stem: String = bad_osstr(
-            path.file_stem()
-                .ok_or(TaggerError::MalformedFile(filename.into()))?,
-        )?;
+        let extension: Option<String> = path.extension().map(dsp);
 
         let mut split_string = stem.split("--").map(String::from);
+        let name = split_string.next().unwrap_or("".into());
+        let tags = split_string.collect();
 
         Ok(TaggedFile {
-            og_file: path.to_owned(),
-            dir: path
-                .parent()
-                .map(|x| match (x.to_owned(), x.exists()) {
-                    (a, true) => format!("{}/", a.into_os_string().into_string().unwrap()),
-                    (_, false) => String::from(""),
-                })
-                .unwrap(),
-            name: split_string
-                .next()
-                .ok_or(TaggerError::MalformedFile(filename.into()))?,
-            tags: split_string.collect(),
+            parent: path.parent().unwrap().to_path_buf(),
+            name,
+            tags,
             extension,
         })
     }
 
     pub fn generate_filename(&self) -> String {
         let mut res: Vec<String> = Vec::new();
-        res.push(self.dir.clone());
-        res.push(self.name.clone());
+        res.push(self.parent.join(self.name.clone()).display().to_string());
         for i in self.tags.iter() {
             res.push(format!("--{}", i))
         }
@@ -97,9 +74,28 @@ impl TaggedFile {
         res.join("")
     }
 
-    pub fn add_tag(&mut self, tag: String) {
+    fn add_tag(&mut self, tag: String) {
         if !self.tags.contains(&tag) {
             self.tags.push(tag)
         }
+    }
+
+    fn rm_tag(&mut self, tag: String) {
+        self.tags.retain(|x| *x != tag);
+    }
+
+    pub fn new_with_modlist(&self, modlist: &[String]) -> Self {
+        let mut new_file = self.clone();
+        for i in modlist {
+            let mut chars = i.chars();
+            match chars.next() {
+                Some('+') => new_file.add_tag(chars.collect()),
+                Some('-') => new_file.rm_tag(chars.collect()),
+                Some(_) => new_file.add_tag(i.to_string()),
+                None => (),
+            }
+        }
+
+        new_file
     }
 }

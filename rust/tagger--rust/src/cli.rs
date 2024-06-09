@@ -1,37 +1,36 @@
-use std::path::PathBuf;
+use tagger::TaggedFile;
 
-use tagger::{TaggedFile, TaggerError};
+fn get_tag(_modlist: &[String]) {
+    todo!()
+}
 
-fn case_multiarg(rest_of_args: &[String], tagged_file: &mut TaggedFile) -> Result<(), TaggerError> {
-    let og_file: PathBuf = tagged_file.og_file.clone();
-
-    for i in rest_of_args {
-        tagged_file.add_tag(i.to_string())
+fn logged_rename(file1: String, file2: String) {
+    match std::fs::rename(&file1, &file2) {
+        Ok(_) => println!("mv {} {}", file1, file2),
+        Err(a) => panic!("Something went wrong when renaming files: {a}"),
     }
-
-    println!("mv {:?} {}", og_file, tagged_file.generate_filename());
-    std::fs::rename(og_file, tagged_file.generate_filename())?;
-
-    Ok(())
 }
 
 pub fn parse_args(args: Vec<String>) {
-    let cmd = || -> Result<(), TaggerError> {
-        let filename: &String = args.get(1).ok_or(TaggerError::ArgumentError(args.len()))?;
-        let mut tagged_file = TaggedFile::from_filename(&filename)?;
+    if args.len() < 1 {
+        panic!("You must specify at least one argument")
+    }
 
-        let rest_of_args = args
-            .get(2..)
-            .ok_or(TaggerError::ArgumentError(args.len()))?;
-
-        match rest_of_args.len() {
-            0 => Ok(println!("{:#?}", tagged_file)),
-            _ => case_multiarg(rest_of_args, &mut tagged_file),
+    let modlist: &[String] = args.get(2..).map(|x| x).unwrap_or(&[]);
+    match args.get(1).map(|x| x.as_str()) {
+        Some("get") => {
+            get_tag(modlist);
         }
-    };
-
-    match cmd() {
-        Ok(_) => (),
-        Err(e) => eprintln!("{}", e),
+        Some(_) => {
+            if let Ok(old_file) = TaggedFile::from_filename(args.get(1).unwrap()) {
+                let new_file = old_file.new_with_modlist(modlist);
+                logged_rename(old_file.generate_filename(), new_file.generate_filename());
+            } else {
+                panic!("Failed to parse filename")
+            };
+        }
+        None => {
+            panic!("You must specify arg1")
+        }
     }
 }
