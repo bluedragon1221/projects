@@ -33,7 +33,7 @@ mod factor {
     }
 
     pub fn fmt_pair(pair: Pair, variable: char) -> Option<String> {
-        let sign = |x| Some(cmp_split(x, '+', '-')?);
+        let sign = |x| Some(cmp_split(x, '+', '-')?); // None if x == 0
         let factor = |x| Some(format!("({variable} {} {})", sign(x)?, x));
 
         Some(format!("{}{}", factor(pair.0)?, factor(pair.1)?))

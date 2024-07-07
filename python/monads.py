@@ -1,5 +1,6 @@
 from __future__ import annotations
-from typing import Any, Callable
+from typing import Callable
+
 
 class Functor:
     def __init__(self, value):
@@ -10,6 +11,7 @@ class Functor:
 
     def __repr__(self):
         return str(self.value)
+
 
 class ListFunctor:
     def __init__(self, value: list):

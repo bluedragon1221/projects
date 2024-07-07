@@ -18,8 +18,8 @@ enum Comp {
 impl Comp {
     fn from_char(character: char) -> Result<Comp, GuesserError> {
         match character {
-            'h' => Ok(Comp::TooHigh),
-            'l' => Ok(Comp::TooLow),
+            '1' => Ok(Comp::TooHigh),
+            '0' => Ok(Comp::TooLow),
             '=' => Ok(Comp::JustRight),
             e => Err(GuesserError::UnexpectedKey(e)),
         }
@@ -66,7 +66,7 @@ impl Bot<HasGuess> {
         match comp {
             Comp::TooHigh => guess_range.0 = self.guess.unwrap(),
             Comp::TooLow => guess_range.1 = self.guess.unwrap(),
-            Comp::JustRight => todo!(),
+            Comp::JustRight => panic!("The number is {}!", self.guess.unwrap()),
         }
 
         Bot::<NoGuess> {
@@ -83,9 +83,11 @@ impl Bot<HasGuess> {
 
 fn main() {
     let term = Term::stdout();
-    let mut bot = Bot::<NoGuess>::new(0, 100);
+    let mut bot = Bot::new(0, 100);
 
-    println!("You're thinking of a number between 0 and 100");
+    println!(
+        "You're thinking of a number between 0 and 100. press '1' for higher or '0' for lower"
+    );
 
     loop {
         let n_bot = bot.do_guess();

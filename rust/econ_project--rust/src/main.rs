@@ -30,7 +30,7 @@ impl Inventory {
             goods: 0,
         }
     }
-    fn add(&mut self, second: Inventory) {
+    fn add(&mut self, second: &Inventory) {
         self.money += second.money;
         self.labor += second.labor;
         self.energy += second.energy;
@@ -38,7 +38,7 @@ impl Inventory {
         self.goods += second.goods;
     }
 
-    fn subtract(&mut self, second: Inventory) {
+    fn subtract(&mut self, second: &Inventory) {
         self.money -= second.money;
         self.labor -= second.labor;
         self.energy -= second.energy;
@@ -123,14 +123,14 @@ impl Player {
     }
 
     fn add_industry(&mut self, industry: Industry) {
-        self.inventory.subtract(industry.build_cost.clone());
+        self.inventory.subtract(&industry.build_cost);
         self.industries.push(industry);
     }
 
     fn turn(&mut self) {
         for industry in &self.industries {
-            self.inventory.subtract(industry.turn_cost.clone());
-            self.inventory.add(industry.turn_income.clone());
+            self.inventory.subtract(&industry.turn_cost);
+            self.inventory.add(&industry.turn_income);
         }
     }
 }

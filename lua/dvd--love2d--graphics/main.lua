@@ -1,12 +1,6 @@
 ---@diagnostic disable: undefined-global
 
-local Object = require 'lib.classic'
-local switch = require 'lib.switch'
-
-local screen = {
-  width = 1024,
-  height = 576
-}
+local Object = require 'libraries.classic'
 
 local Character = Object:extend()
 function Character:new()
@@ -34,7 +28,11 @@ function Character:move(dt)
 end
 
 function Character:draw()
-	love.graphics.draw(self.image, self.quad, self.x, self.y)
+  if self.image == nil then
+    love.graphics.rect(self.x, self.y, self.w, self.h)
+  else
+		love.graphics.draw(self.image, self.quad, self.x, self.y)
+  end
 end
 
 local Side = {
@@ -59,12 +57,15 @@ function Character:is_touching_wall()
 end
 
 function Character:turn_on_wall(wall)
-  switch(wall)
-    .case(Side.Left, function() self.vx = self._BASE_VX end)
-    .case(Side.Right, function() self.vx = -self._BASE_VX end)
-    .case(Side.Top, function() self.vy = self._BASE_VY end)
-    .case(Side.Bottom, function() self.vy = -self._BASE_VY end)
-    .process()
+  if wall == Side.Left then
+    self.vx = self._BASE_VX
+  elseif wall == Side.Right then
+    self.vx = -self._BASE_VX
+  elseif wall == Side.Top then
+    self.vy = self._BASE_VY
+  elseif wall == Side.Bottom then
+    self.vy = -self._BASE_VY
+  end
 end
 
 function Character:load_image(file)
@@ -76,6 +77,11 @@ end
 local character = Character()
 
 function love.load()
+  screen = {
+    width = 1024,
+    height = 576
+  }
+
   character:load_image('dvd.png')
   love.window.setMode(screen.width, screen.height)
 end
@@ -91,9 +97,4 @@ end
 
 function love.draw()
   character:draw()
-end
-
-function love.mousepressed()
-  character.is_moving = true
-  character.vx = -character.vx
 end
