@@ -1,0 +1,16 @@
+EmployeeID,Name,Department,Role,YearsExperience,Age,Gender,Education,PerformanceScore,Salary,ProjectsCompleted,TrainingHours,SatisfactionScore
+1001,John Doe,Engineering,Software Engineer,5,30,M,Bachelor's,85,75000,12,40,4.2
+1002,Jane Smith,Marketing,Marketing Specialist,3,28,F,Master's,78,65000,8,30,3.9
+1003,Mike Johnson,Sales,Sales Representative,7,35,M,Bachelor's,92,80000,15,25,4.5
+1004,Emily Brown,HR,HR Manager,10,40,F,Master's,88,90000,6,50,4.0
+1005,David Lee,Engineering,Senior Developer,8,37,M,PhD,95,100000,20,60,4.7
+1006,Sarah Wilson,Finance,Financial Analyst,4,29,F,Bachelor's,82,70000,10,35,4.1
+1007,Chris Taylor,Marketing,Content Creator,2,25,M,Bachelor's,75,55000,6,20,3.8
+1008,Lisa Anderson,Sales,Sales Manager,12,45,F,Master's,90,110000,25,45,4.3
+1009,Tom White,Engineering,QA Engineer,6,33,M,Bachelor's,80,72000,14,30,3.9
+1010,Emma Garcia,HR,Recruiter,3,27,F,Bachelor's,77,60000,5,25,4.0
+1011,Ryan Martinez,Finance,Senior Accountant,9,38,M,Master's,89,95000,18,40,4.4
+1012,Olivia Johnson,Marketing,Marketing Manager,8,36,F,Master's,87,92000,16,55,4.2
+1013,Daniel Brown,Sales,Sales Representative,4,30,M,Bachelor's,79,68000,10,30,3.7
+1014,Sophia Lee,Engineering,Data Scientist,7,34,F,PhD,93,105000,22,70,4.6
+1015,James Wilson,HR,HR Specialist,5,31,M,Bachelor's,81,67000,8,35,4.0

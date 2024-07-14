@@ -1,8 +1,0 @@
-def hello(name):
-    """greets {name}"""
-    print(f"Hello, {name}!")
-
-if __name__ == '__main__':
-    hello("Collin")
-
-# This is some other text

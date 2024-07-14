@@ -1,9 +1,0 @@
-[package]
-name = "exempt"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-getset = "0.1.2"
-impl_new = "0.2.1"
-thiserror = "1.0.60"

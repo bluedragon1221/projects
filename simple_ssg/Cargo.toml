@@ -1,0 +1,18 @@
+[package]
+name = "simple_ssg"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fronma = "0.2.0"
+markdown = "1.0.0-alpha.18"
+rocket = "0.5.1"
+rocket_dyn_templates = { version = "0.2.0", features = ["minijinja"] }
+serde = "1.0.204"
+thiserror = "1.0.61"
+
+[lints.clippy]
+min_ident_characters = "warn"
+redundant_closure_for_method_calls = "warn"
+uninlined_format_args = "warn"
+unwrap_used = "deny"
