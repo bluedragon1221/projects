@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            height: 100%;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-title {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 20px;
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .chat-log {
+            padding: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .chat-log ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .chat-log li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-right: 10px;
+        }
+
+        .message {
+            color: #34495e;
+        }
+
+        .chat-input-form {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .submit-button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1 class="chat-title">{{title}}</h1>
+        <div class="chat-log">
+            <ul>
+                {% for m in messages %}
+                    <li><span class="username">{{m.username}}:</span> <span class="message">{{m.message}}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <form class="chat-input-form" method="POST">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username-input" required>
+            </div>
+            <div class="input-group">
+                <label for="message">Message:</label>
+                <input type="text" name="message" id="message-input" required>
+            </div>
+            <button type="submit" class="submit-button">Send</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -12,20 +12,13 @@
         // Off by default, but configurable if desired
         "python.analysis.typeCheckingMode": "off",
         "python.analysis.autoImportCompletions": true,
-        "notebook.cellFocusIndicator": "border",
-        "notebook.output.scrolling": true,
-        "remote.autoForwardPortsSource": "hybrid"
       },
       "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "ms-toolsai.jupyter",
-        "donjayamanne.vscode-default-python-kernel",
-        "mechatroner.rainbow-csv",
-        "ms-python.black-formatter"
+        "mechatroner.rainbow-csv"
       ]
     }
   },
   "remoteUser": "root"
 }
-

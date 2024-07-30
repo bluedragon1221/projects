@@ -1,0 +1,2 @@
+[default.databases.message_logs]
+url = "./message_logs.sqlite"

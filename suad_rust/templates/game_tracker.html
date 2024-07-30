@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Tracker</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Game Tracker</h1>
+        
+        <!-- Main Game Display -->
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    {% for player in players %}
+                        <th>{{player}}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="total-row">
+                    <td>Total</td>
+                    {% for score in total_scores %}
+                        <td>{{score}}</td>
+                    {% endfor %}
+                </tr>
+                {% for round in game %}
+                    <tr>
+                        <td>Round {{loop.index}}</td>
+                        {% for score in round %}
+                            <td>{{score}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                <tr class="total-row">
+                    <td><b>Next Round</b></td>
+                    {% for player in players %}
+                    <td class="input-group">
+                        <input type="number" step="5" id="score-{{loop.index0}}" form="add-round-form" name="scores[]" required>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    
+        <br>
+        
+        <!-- Player inputs -->
+        <form action="/add-round" method="post" id="add-round-form" class="score-inputs"></form>
+
+        <!-- Submit buttons -->
+        <div class="button-row">
+            <button class="submit-add-round" form="add-round-form" type="submit">Add Round</button>
+            <form action="/export-csv" method="post">
+                <button class="submit-export-csv" type="submit">Export as CSV</button>
+            </form>
+            <form action="/game-graph" method="post" id="game-graph-form">
+                <button class="submit-game-graph" type="submit">Generate Graph</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

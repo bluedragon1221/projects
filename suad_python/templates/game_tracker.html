@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Tracker</title>
+    <style>
+        :root {
+            --blue-accent: 100, 100, 255;
+            --green-accent: 76, 174, 79;
+            --red-accent: 255, 7, 58;
+        }
+
+        * {
+            font-family: 'Space Mono', monospace;
+        }
+
+        *:focus {
+            outline: 0px none transparent;
+        }
+
+        body {
+            background: black;
+            color: #e0e0ff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(20, 20, 50, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            text-shadow: 0 0 20px rgb(var(--blue-accent));
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th,
+        td:not(.total-row) {
+            padding: 15px;
+            text-align: center;
+        }
+
+        thead th {
+            background: rgba(var(--blue-accent), 0.2);
+            color: white;
+            text-shadow: 0 0 5px rgb(var(--blue-accent));
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tbody tr {
+            background: rgba(40, 40, 80, 0.6);
+            transition: all 0.3s ease-in-out;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background: rgba(60, 60, 120, 0.8);
+            color: white;
+            text-shadow: 0 0 5px rgb(var(--blue-accent));
+        }
+
+        .score-inputs {
+            display: flex;
+            flex-direction: row;
+        }
+
+        input[type="number"] {
+            display: inline;
+            width: 60px;
+            padding: 8px;
+            border: 2px solid rgb(var(--button-color));
+            border-radius: 5px;
+            background: rgba(40, 40, 80, 0.6);
+            color: #e0e0ff;
+            appearance: textfield;
+            -moz-appearance: textfield;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            background: rgba(var(--blue-accent), 0.2);
+            box-shadow: 0 0 20px rgba(var(--blue-accent), 0.5);
+        }
+
+        .button-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        /* Reset styles of button */
+        button {
+            background: none;
+            border: none;
+            padding: 0 !important;
+            /* optional */
+            color: #069;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        a {
+            text-align: center;
+        }
+
+        .btn {
+            --button-color: #fff;
+            color: white;
+            border: 2px solid rgb(var(--button-color));
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            flex: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(var(--button-color), 0.2);
+            text-shadow: 0 0 5px rgb(var(--button-color));
+        }
+
+        .btn:hover {
+            background: rgba(var(--button-color), 0.2);
+            box-shadow: 0 0 20px rgba(var(--button-color), 0.5);
+        }
+
+        .btn.submit-add-round {
+            --button-color: var(--blue-accent);
+            flex: 12;
+        }
+
+        .btn.submit-export-csv {
+            --button-color: var(--green-accent)
+        }
+
+        .btn.submit-game-graph {
+            --button-color: var(--red-accent);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Game Tracker</h1>
+
+        <!-- Main Game Display -->
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    {% for player in players %}
+                    <th>{{ player }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="total-row">
+                    <td>Total</td>
+                    {% for score in total_scores %}
+                    <td>{{ score }}</td>
+                    {% endfor %}
+                </tr>
+                {% for round in game %}
+                <tr>
+                    <td>Round {{ loop.index }}</td>
+                    {% for score in round %}
+                    <td>{{ score }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                <tr class="total-row">
+                    <td><b>Next Round</b></td>
+                    {% for player in players %}
+                    <td class="input-group">
+                        <input type="number" step="5" id="score-{{ loop.index0 }}" form="add-round-form" name="scores" required>
+                    </td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <!-- Player inputs -->
+        <form action="{{ url_for('add_round') }}" method="post" id="add-round-form" class="score-inputs"></form>
+
+        <!-- Submit buttons -->
+        <div class="button-row">
+            <button class="btn submit-add-round" form="add-round-form" type="submit">Add Round</button>
+            <a class="btn submit-export-csv" href="/export-csv">CSV</a>
+            <a class="btn submit-game-graph" href="/game-graph">Graph</a>
+        </div>
+    </div>
+</body>
+
+</html>

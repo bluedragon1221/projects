@@ -1,0 +1,21 @@
+[package]
+name = "mm_rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rocket = "0.5.1"
+serde = "1.0.204"
+
+[dependencies.rocket_dyn_templates]
+version = "0.2.0"
+features = ["minijinja"]
+
+[dependencies.sqlx]
+version = "0.7"
+default-features = false
+features = ["macros", "migrate"]
+
+[dependencies.rocket_db_pools]
+version = "0.2.0"
+features = ["sqlx_sqlite"]
