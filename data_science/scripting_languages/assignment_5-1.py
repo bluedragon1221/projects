@@ -4,8 +4,8 @@ class ProductionWorker(BaseModel):
     name: str
     id_num: int
     shift: int
-    pay: int
-    
+    pay: float
+
 def print_info(employee: ProductionWorker):
     print("Production Worker Information")
     print("Name:", employee.name)

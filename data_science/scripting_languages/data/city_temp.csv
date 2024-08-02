@@ -1,4 +1,4 @@
-Month,CityA_High,CityA_Low,CityB_High,CityB_Low
+Month,CityA.High,CityA.Low,CityB.High,CityB.Low
 Jan,38,24,55,28
 Feb,50,35,63,36
 Mar,60,42,75,48
