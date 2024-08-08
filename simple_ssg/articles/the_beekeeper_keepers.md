@@ -1,7 +1,7 @@
 ---
 title: The Beekeeper-keepers
 slug: beekeeper
-author: Steph Ango (stephango.com)
+author: <a href="https://stephango.com">Steph Ango</a>
 tags: []
 ---
 Bees collect nectar to make honey. Beekeepers collect honey to make money. Honey helps bees survive winter chills. Money helps beekeepers pay the bills.

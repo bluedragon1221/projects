@@ -1,7 +1,8 @@
 ---
 title: Curve Into the Target
 slug: curve-target
-author: Derek Sivers (sive.rs)
+author: <a href="https://sive.rs">Derek Sivers</a>
+summary: The article explores how adjusting one's approach by aiming away from the target, much like correcting a curve in bowling or frisbee, can help align predictions and beliefs more accurately. It suggests that compensating for personal biases—despite feeling counterintuitive—can lead to more truthful outcomes in estimates and memory.
 tags: ["Self Help"]
 ---
 I’m pretty bad at bowling and frisbee.

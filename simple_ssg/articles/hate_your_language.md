@@ -1,7 +1,7 @@
 ---
 title: I Probably Hate Writing Code in Your Favorite Language
 slug: hate-your-language
-author: Ashton Wiersdorf (lambdaland.org)
+author: <a href="https://lambdaland.org">Ashton Wiersdorf</a>
 tags: ["Functional Programming"]
 ---
 

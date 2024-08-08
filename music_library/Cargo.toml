@@ -1,0 +1,9 @@
+[package]
+name = "music_library"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = "1.0.204"
+sqlx = { version = "0.8.0", features = ["sqlite"] }
+toml = "0.8.19"

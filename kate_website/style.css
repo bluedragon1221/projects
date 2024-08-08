@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.content {
+    background: lightblue;
+    width: 65%;
+    margin: 0 auto;
+    height: 100vh;
+}
+
+h1 {
+    font-family: "Lobster Two", sans-serif;
+
+    font-size: 30pt;
+    font-weight: 700;
+
+    text-align: center;
+    padding: 20px !important;
+
+}
+
+.paint-splatter {
+    position: relative;
+    top: -120px;
+}

@@ -1,0 +1,48 @@
+[[songs]]
+name = "Raindrop"
+composer = "Frederic Chopin"
+opus = 28
+number = 15
+path = "music/raindrop.mp3"
+performer = "Rousseau"
+era = "Romantic"
+
+[[songs]]
+name = "Fantaisie Impromptu"
+composer = "Frederic Chopin"
+opus = 66
+path = "music/fantaisie_impromptu.mp3"
+performer = "Rousseau"
+era = "Romantic"
+
+[[songs]]
+name = "Chopin"
+composer = "Robert Schumann"
+opus = 9
+number = 12
+path = "music/chopin.mp3"
+performer = "Rousseau"
+era = "Romantic"
+
+[[songs]]
+name = "Claire de Lune"
+composer = "Claude Debussy"
+path = "music/claire_de_lune.mp3"
+performer = "Rousseau"
+era = "Impressionist"
+
+[[songs]]
+name = "Moonlight Sonata"
+composer = "Ludwig van Beethoven"
+opus = 14
+number = 3
+path = "music/moonlight_sonata_3.mp3"
+era = "Romantic"
+
+[[songs]]
+name = "Alla Marcia"
+composer = "Sergei Rachmaninoff"
+opus = 23
+number = 5
+performer = "Lang Lang"
+era = "Romantic"

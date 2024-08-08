@@ -1,7 +1,7 @@
 ---
 title: Splitting the Web
 slug: split-web
-author: Ploum (ploum.net)
+author: <a href="ploum.net">Ploum</a>
 tags: ["Modern Web"]
 ---
 

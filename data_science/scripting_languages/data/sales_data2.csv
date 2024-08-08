@@ -1,0 +1,16 @@
+date,product,category,quantity,unit_price,total_sales
+2023-01-15,Laptop,Electronics,5,899.99,4499.95
+2023-01-16,T-shirt,Clothing,20,19.99,399.80
+2023-01-17,Coffee Maker,Home Appliances,8,59.99,479.92
+2023-01-18,Running Shoes,Footwear,12,79.99,959.88
+2023-01-19,Smartphone,Electronics,3,599.99,1799.97
+2023-02-01,Jeans,Clothing,15,49.99,749.85
+2023-02-02,Microwave,Home Appliances,6,89.99,539.94
+2023-02-03,Tablet,Electronics,4,299.99,1199.96
+2023-02-04,Dress Shoes,Footwear,7,99.99,699.93
+2023-02-05,Blender,Home Appliances,10,39.99,399.90
+2023-03-10,Smartwatch,Electronics,9,199.99,1799.91
+2023-03-11,Jacket,Clothing,6,79.99,479.94
+2023-03-12,Toaster,Home Appliances,11,29.99,329.89
+2023-03-13,Sneakers,Footwear,18,69.99,1259.82
+2023-03-14,Headphones,Electronics,25,49.99,1249.75

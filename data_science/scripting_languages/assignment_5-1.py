@@ -1,10 +1,13 @@
-from pydantic import BaseModel
+from decimal import Decimal
+
+from pydantic import BaseModel, Field
+
 
 class ProductionWorker(BaseModel):
-    name: str
-    id_num: int
-    shift: int
-    pay: float
+    pay: Decimal = Field(decimal_places=2, frozen=True)
+    shift: int = Field(gt=0, lt=3, frozen=True)
+    name: str = Field(frozen=True)
+    id_num: int = Field(frozen=True)
 
 def print_info(employee: ProductionWorker):
     print("Production Worker Information")

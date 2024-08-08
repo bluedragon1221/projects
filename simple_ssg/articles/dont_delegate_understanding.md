@@ -1,7 +1,7 @@
 ---
 title: Don't Delegate Understanding
 slug: understand
-author: Steph Ango (stephango.com)
+author: <a href="https://stephango.com">Steph Ango</a>
 tags: []
 ---
 

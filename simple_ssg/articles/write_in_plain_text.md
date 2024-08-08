@@ -1,7 +1,7 @@
 ---
 title: Write Plain Text Files
 slug: plain-text
-author: Derek Sivers (sive.rs)
+author: <a href="https://sive.rs">Derek Sivers</a>
 tags: ["Plain Text"]
 ---
 

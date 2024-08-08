@@ -1,7 +1,7 @@
 ---
 title: What can we remove?
 slug: remove
-author: Steph Ango (stephango.com)
+author: <a href="https://stephango.com">Steph Ango</a>
 tags: []
 ---
 

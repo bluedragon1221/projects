@@ -1,51 +1,49 @@
-#![feature(isqrt)]
+pub mod util {
+    pub fn checked_isqrt(num: i32) -> Option<i32> {
+        if num == 0 || num == 1 {
+            return Some(num);
+        }
 
-mod util {
-    use std::cmp::Ordering;
-    pub fn cmp_split<T>(x: i32, greater_fn: T, less_fn: T) -> Option<T> {
-        match x.cmp(&0) {
-            Ordering::Greater => Some(greater_fn),
-            Ordering::Less => Some(less_fn),
-            Ordering::Equal => None,
+        let mut x = num / 2;
+        let mut y = (x + num / x) / 2;
+
+        while y < x {
+            x = y;
+            y = (x + num / x) / 2;
+        }
+
+        if x * x == num {
+            Some(x)
+        } else {
+            None
         }
     }
 }
 
-mod factor {
-    use super::util::cmp_split;
-    use list_comprehension_macro::comp;
+use util::checked_isqrt;
 
-    type Pair = (i32, i32);
-    type Triple = (i32, i32, i32);
-
-    fn get_factors(v: i32) -> Option<Vec<Pair>> {
-        let range = cmp_split(v, 1..v.checked_isqrt()? + 1, v..0)?;
-        Some(comp![(i, v / i) for i in range if v % i == 0])
-    }
-
-    pub fn select_factor(vars: Triple) -> Option<Pair> {
-        let (a, b, c) = vars;
-
-        get_factors(a * c)?
-            .into_iter()
-            .filter(|(x, y)| x + y == b)
-            .nth(0)
-    }
-
-    pub fn fmt_pair(pair: Pair, variable: char) -> Option<String> {
-        let sign = |x| Some(cmp_split(x, '+', '-')?); // None if x == 0
-        let factor = |x| Some(format!("({variable} {} {})", sign(x)?, x));
-
-        Some(format!("{}{}", factor(pair.0)?, factor(pair.1)?))
-    }
+struct Quadratic {
+    a: i32,
+    b: i32,
+    c: i32,
 }
 
-use factor::{fmt_pair, select_factor};
+fn get_factor_pairs(num: i32) -> Option<Vec<(i32, i32)>> {
+    let range = if num > 0 {
+        Some(1..checked_isqrt(num)? + 1)
+    } else if num < 0 {
+        Some(num..0)
+    } else {
+        None
+    };
 
-fn main() {
-    let vars = (3, -17, -6);
+    range.map(|x| {
+        x.filter(|y| num % y == 0)
+            .map(|y| (y, num / y))
+            .collect::<Vec<(i32, i32)>>()
+    })
+}
 
-    let pair = select_factor(vars).unwrap();
-
-    println!("{}", fmt_pair(pair, 'x').unwrap())
+impl Quadratic {
+    fn to_factors(&self) -> (i32, i32) {}
 }

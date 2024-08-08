@@ -2,7 +2,7 @@ use std::fs;
 
 use fronma::parser::parse as fronma_parse;
 use markdown::to_html as md_to_html;
-use rocket::{get, launch, response::status::NotFound, routes, State};
+use rocket::{fs::{relative, FileServer}, get, launch, response::status::NotFound, routes, State};
 use rocket_dyn_templates::{context, Template};
 use serde::{Deserialize, Serialize};
 
@@ -21,18 +21,13 @@ impl From<fronma::error::Error> for SsgError {
     }
 }
 
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 struct ArticleFrontmatter {
     title: String,
     slug: String,
     author: String,
+    summary: String,
     tags: Vec<String>,
-}
-
-#[derive(Serialize)]
-struct ArticleTemplateData {
-    title: String,
-    path: String,
 }
 
 struct Article {
@@ -51,13 +46,6 @@ impl Article {
             frontmatter,
             content,
         })
-    }
-
-    fn build_template_data(&self) -> ArticleTemplateData {
-        ArticleTemplateData {
-            title: self.frontmatter.title.clone(),
-            path: format!("/{}", self.frontmatter.slug),
-        }
     }
 }
 
@@ -82,10 +70,10 @@ impl ArticleList {
 
 #[get("/")]
 fn article_list(article_list: &State<ArticleList>) -> Template {
-    let template_data: Vec<ArticleTemplateData> = article_list
+    let template_data: Vec<&ArticleFrontmatter> = article_list
         .articles
         .iter()
-        .map(Article::build_template_data)
+        .map(|x| &x.frontmatter)
         .collect();
 
     Template::render(
@@ -130,5 +118,6 @@ fn rocket() -> _ {
     rocket::build()
         .manage(build_article_list().unwrap_or_default())
         .mount("/", routes![article_list, get_slug])
+        .mount("/static", FileServer::from(relative!("static")))
         .attach(Template::fairing())
 }
