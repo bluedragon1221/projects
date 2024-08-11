@@ -1,8 +1,14 @@
-(ql:quickload '(:str :arrow-macros :fn) :silent t)
-(named-readtables:in-readtable :fn.reader)
+(require "asdf")
+
+(asdf:load-system "str")
+
+(asdf:load-system "arrow-macros")
 (use-package :arrow-macros)
 
-(defun first-char-p (c) λ(-> _ str:s-first (char= c)))
+(asdf:load-system "fn")
+(named-readtables:in-readtable :fn.reader)
+
+(defun first-char-p (c) (lambda (x) (-> x str:s-first (char= c))))
 (defun or-nil (v) (-> v length (> 0) (if v nil)))
 (defun comp (char components)
   (->> components
