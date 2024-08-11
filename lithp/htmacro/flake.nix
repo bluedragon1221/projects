@@ -8,9 +8,9 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system}.extend cl-nix-lite.overlays.default;
     in {
-      packages.default = with pkgs.lispPackagesLite; lispScript {
+      packages.${system}.default = with pkgs.lispPackagesLite; lispScript {
         name = "htmacro";
-        dependencies = [ "str" "fn" "arrow-macros" ];
+        dependencies = [ str arrow-macros ];
         src = "./main.lisp";
       };
     };
