@@ -3,20 +3,20 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { nixpkgs, cl-nix-lite, ... }: let
+  outputs = { nixpkgs, ... }: let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pyEnv = pkgs.python3.withPackages (ps: with ps; [
+        uvicorn
+        starlette
+        jinja2
+        pandas
+        matplotlib
+      ]);
     in {
-      packages.${system}.default = derivation {
-        name = "Seven up and down tracker";
-        buildInputs = with pkgs.python312Packages; [
-          starlette jinja2 pandas matplotlib
-        ];
-        builder = pkgs.python312Packages.uvicorn;
-        args = "app:app";
-        src = ./.;
-        system = system;
-      };
+      packages.${system}.default = pkgs.writeShellScriptBin "suad" ''
+        ${pyEnv}/bin/uvicorn app:app
+      '';
     };
 }
 

@@ -11,7 +11,7 @@
       packages.${system}.default = with pkgs.lispPackagesLite; lispScript {
         name = "htmacro";
         dependencies = [ str arrow-macros ];
-        src = "./main.lisp";
+        src = ./main.lisp;
       };
     };
 }

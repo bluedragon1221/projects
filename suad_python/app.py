@@ -5,6 +5,7 @@ from starlette.responses import Response, RedirectResponse, StreamingResponse
 from starlette.templating import Jinja2Templates
 from starlette.routing import Route, Mount
 from starlette.staticfiles import StaticFiles
+# import uvicorn
 import io
 
 DATA_FILE = 'static/game.csv'
@@ -67,3 +68,6 @@ app = Starlette(debug=False, routes=[
     Route("/game-graph", generate_graph),
     Mount("/static", StaticFiles(directory="static"), name="static")
 ])
+
+# if __name__ == "__main__":
+#     uvicorn.run(app, host="0.0.0.0", port=8000)
