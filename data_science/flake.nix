@@ -14,10 +14,18 @@
         numpy
         matplotlib
       ]);
+
+      customCode = pkgs.vscode-with-extensions.override {
+        vscodeExtensions = with pkgs.vscode-extensions; [
+          ms-python.python
+          ms-toolsai.jupyter
+        ];
+      };
     in {
-      packages.${system}.default = pkgs.writeShellScriptBin "suad" ''
-        ${pyEnv}/bin/jupyter notebook
-      '';
+      packages.${system} = {
+        jupyter = pkgs.writeShellScriptBin "j" "${pyEnv}/bin/jupyter notebook";
+        code = pkgs.writeShellScriptBin "code" "${customCode}/bin/code .";
+      };
     };
 }
 

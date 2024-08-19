@@ -104,7 +104,7 @@ fn get_slug(slug: &str, article_list: &State<ArticleList>) -> Result<Template, N
 fn build_article_list() -> Result<ArticleList, SsgError> {
     let mut article_vec = Vec::<Article>::new();
 
-    let articles_dir = fs::read_dir("articles/")?;
+    let articles_dir = fs::read_dir("../articles/")?;
     for file in articles_dir {
         article_vec
             .push(Article::from_file(&file?.path().display().to_string())?);
@@ -118,6 +118,6 @@ fn rocket() -> _ {
     rocket::build()
         .manage(build_article_list().unwrap_or_default())
         .mount("/", routes![article_list, get_slug])
-        .mount("/static", FileServer::from(relative!("static")))
+        // .mount("/static", FileServer::from(relative!("static")))
         .attach(Template::fairing())
 }

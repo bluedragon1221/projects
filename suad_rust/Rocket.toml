@@ -1,2 +1,0 @@
-[default.databases.game_data]
-url = "./game_data.sqlite"
