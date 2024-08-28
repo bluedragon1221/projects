@@ -1,3 +1,3 @@
-(defmacro infix (x op y) `(,op ,x ,y))
+(defmacro $ (x op y) `(,op ,x ,y))
 
-(format t "~A~%" (infix 2 + (infix 5 - 3)))
+(format t "~A~%" ($ 2 + ($ 5 - 3)))
